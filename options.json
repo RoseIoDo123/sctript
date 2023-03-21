@@ -1,0 +1,20 @@
+{ 
+"cookie": "PHPSESSID=bh6n035h3n6b8s3s0g97rpvlt0",
+    "server_ids": [
+		3043
+    ],
+    "server_folder_names": {
+		"3043": "Лихие"
+    },
+    "filenames": [
+        "L20220209.log"
+    ],
+  "downloadFilenamePrefix": "L",
+  "downloadStartFromDay": 0,
+  "downloadType": 1,
+  "downloadAllServers": false
+
+}
+	
+	
+	
