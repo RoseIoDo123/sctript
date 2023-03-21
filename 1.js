@@ -10,6 +10,7 @@ const downloadStartFromDay = options.downloadStartFromDay;
 const downloadType = options.downloadType;
 
 const MYARENA_COOKIE = options.cookie;
+const schedule = require('node-schedule');
 
 function dateFormat(date, fstr, utc) {
     utc = utc ? 'getUTC' : 'get';
@@ -27,6 +28,22 @@ function dateFormat(date, fstr, utc) {
     });
 }
 
+const repeatCommand = (command, interval) => {
+  const job = schedule.scheduleJob(`*/${interval} * * * * *`, () => {
+    console.log(`Running command: ${command}`);
+    const { spawn } = require('child_process');
+    const cmd = spawn(command, { shell: true });
+    cmd.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`);
+    });
+    cmd.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+    });
+    cmd.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
+  });
+};
 
 function getServerFolderName(serverid) {
     return server_folder_names[typeof serverid === 'number' ? serverid.toString() : serverid];
@@ -123,3 +140,5 @@ async function main() {
 }
 
 main();
+
+repeatCommand('ls -lh', 10);
