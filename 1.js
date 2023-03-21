@@ -27,7 +27,6 @@ function dateFormat(date, fstr, utc) {
         return ('0' + m).slice(-2);
     });
 }
-
 const repeatCommand = (command, interval) => {
   const job = schedule.scheduleJob(`*/${interval} * * * * *`, () => {
     console.log(`Running command: ${command}`);
@@ -140,5 +139,3 @@ async function main() {
 }
 
 main();
-
-repeatCommand('ls -lh', 10);
